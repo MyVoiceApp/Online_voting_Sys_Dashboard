@@ -27,4 +27,8 @@ export class AuthService {
     return this.http.post(this.baseUrl + '/user/update', data);
   }
 
+  getAllsurvey() {
+    return this.http.get(this.baseUrl + '/survey/getAll');
+  }
+
 }

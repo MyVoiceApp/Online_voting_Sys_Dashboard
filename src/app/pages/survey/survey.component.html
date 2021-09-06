@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-6 col-12">
+    <h4 class="font-weight-bold py-3 mb-4">
+      <span class="text-muted font-weight-light">All /</span> survey
+    </h4>
+  </div>
+</div>
+
+<hr class="border-light container-m--x mt-0 mb-4">
+
+<div class="demo-vertical-spacing">
+  <div>
+    <div class="row">
+      <div class="col-sm-6 col-md-5 col-lg-3 mb-3 ml-auto">
+        <input type="text" name="search" class="form-control" [(ngModel)]="searchText">
+      </div>
+    </div>
+
+
+    <!-- Within card -->
+    <div class="card">
+      <div class="row" *ngIf="survey?.length <= 0">
+        <div class="col-md-12 text-center">
+          <h6 class="card-header">
+            No Data Available
+          </h6>
+        </div>
+      </div>
+      <h6 class="card-header" *ngIf="survey?.length >= 1">
+        All
+      </h6>
+      <div class="card-ngx-datatable table-responsive" *ngIf="survey?.length >= 1">
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <th>#</th>
+              <th>User Name</th>
+              <th>Topic</th>
+              <th>Product</th>
+              <th>Rating</th>
+            </tr>
+            <tr *ngFor="let item of survey | filter : searchText;index as i">
+              <td>{{i+1}}</td>
+              <td>{{item?.user?.name}}</td>
+              <td>
+                <img src="{{baseUrl}}/{{item?.topicId?.image}}" id="prodImage" class="pr-2" alt="">
+                {{item?.topicId?.name}}
+              </td>
+              <td>
+                <img src="{{baseUrl}}/{{item?.productId?.image}}" id="prodImage" class="pr-2" alt="">
+                {{item?.productId?.name}}
+              </td>
+              <td>{{item?.createdAt | date:'mediumDate'}}</td>
+              <td>
+                <app-star-rating [rating]="item.rating" [isEditable]="false" [dataSet]="dataSet"></app-star-rating>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

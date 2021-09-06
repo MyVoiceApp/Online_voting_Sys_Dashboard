@@ -26,6 +26,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { UpdateProfileComponent } from './pages/profile/update-profile/update-profile.component';
 import { AllSliderComponent } from './pages/slider/all-slider/all-slider.component';
 import { SliderActionComponent } from './pages/slider/slider-action/slider-action.component';
+import { SurveyComponent } from './pages/survey/survey.component';
 
 // *******************************************************************************
 // Routes
@@ -86,6 +87,12 @@ const routes: Routes = [
   {
     path: '', component: Layout2Component, children: [
       { path: 'update-profile', component: UpdateProfileComponent, canActivate: [AuthGuard] },
+    ]
+  },
+
+  {
+    path: '', component: Layout2Component, children: [
+      { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard] },
     ]
   },
 

@@ -46,7 +46,7 @@ import { LayoutService } from './layout.service';
     CommonModule,
     RouterModule,
     NgbModule,
-    SidenavModule
+    SidenavModule,
   ],
   declarations: [
     Layout1Component,

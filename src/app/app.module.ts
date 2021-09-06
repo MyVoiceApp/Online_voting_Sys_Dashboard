@@ -56,6 +56,8 @@ import { UpdateProfileComponent } from './pages/profile/update-profile/update-pr
 import { AllSliderComponent } from './pages/slider/all-slider/all-slider.component';
 import { SliderActionComponent } from './pages/slider/slider-action/slider-action.component';
 import { SliderService } from './services/slider.service';
+import { SurveyComponent } from './pages/survey/survey.component';
+import { StarRatingModule } from 'angular-rating-star';
 
 // *******************************************************************************
 //
@@ -79,6 +81,7 @@ import { SliderService } from './services/slider.service';
     UpdateProfileComponent,
     AllSliderComponent,
     SliderActionComponent,
+    SurveyComponent
   ],
 
   imports: [
@@ -101,6 +104,7 @@ import { SliderService } from './services/slider.service';
     PerfectScrollbarModule,
     NgxDatatableModule,
     Ng2SmartTableModule,
+    StarRatingModule
   ],
 
   providers: [
