@@ -6,6 +6,7 @@ import { ProductService } from '../../../services/product.service';
 import { UploadService } from '../../../services/upload.service';
 import { Location } from '@angular/common';
 import { environment } from '../../../../environments/environment.prod';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-action-product',
@@ -15,6 +16,7 @@ import { environment } from '../../../../environments/environment.prod';
 export class ActionProductComponent implements OnInit {
 
   action = false;
+  categories: any;
   baseUrl = environment.baseurl;
   user = JSON.parse(localStorage.getItem('user'));
   formObj = {
@@ -22,6 +24,7 @@ export class ActionProductComponent implements OnInit {
     name: '',
     image: '',
     description: '',
+    category: null,
     user: this.user._id
   }
 
@@ -32,12 +35,17 @@ export class ActionProductComponent implements OnInit {
     private toast: ToastrService,
     private prodSrv: ProductService,
     private uploadSrv: UploadService,
-    private location: Location
+    private location: Location,
+    private categorySrv: CategoryService
   ) {
 
     this.appService.pageTitle = 'Product';
   }
   ngOnInit() {
+    this.categorySrv.getAll().subscribe((resp: any) => {
+      this.categories = resp.data;
+    })
+
     this.formObj.id = this._route.snapshot.params['id'];
     if (this.formObj.id == 'new') {
       this.action = true;
@@ -45,6 +53,7 @@ export class ActionProductComponent implements OnInit {
       this.action = false;
       this.prodSrv.getById(this.formObj.id).subscribe((resp: any) => {
         console.log(resp);
+        this.formObj.category = resp.data.category;
         this.formObj.name = resp.data.name;
         this.formObj.image = resp.data.image;
         this.formObj.description = resp.data.description;
@@ -61,10 +70,10 @@ export class ActionProductComponent implements OnInit {
 
   create() {
     console.log(this.formObj);
-
     if (
       this.formObj.name === '' ||
-      this.formObj.image === ''
+      this.formObj.image === '' ||
+      this.formObj.category === null
     ) {
       this.toast.error('Credentials is not correct', 'Oops', {
         timeOut: 2000,
