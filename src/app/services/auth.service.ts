@@ -31,4 +31,8 @@ export class AuthService {
     return this.http.get(this.baseUrl + '/survey/getAll');
   }
 
+  getAllVotes() {
+    return this.http.get(this.baseUrl + '/voteproduct/getAll');
+  }
+
 }

@@ -16,6 +16,7 @@ import { HotTopicService } from '../../../services/hot-topic.service';
 export class ActionTopicsComponent implements OnInit {
 
   action = false;
+  categories: any;
   baseUrl = environment.baseurl;
   user = JSON.parse(localStorage.getItem('user'));
   formObj = {
@@ -23,6 +24,7 @@ export class ActionTopicsComponent implements OnInit {
     name: '',
     image: '',
     description: '',
+    category: null,
     user: this.user._id
   }
 
@@ -33,12 +35,17 @@ export class ActionTopicsComponent implements OnInit {
     private toast: ToastrService,
     private topicSrv: HotTopicService,
     private uploadSrv: UploadService,
-    private location: Location
+    private location: Location,
+    private categorySrv: CategoryService
   ) {
 
     this.appService.pageTitle = 'Category';
   }
   ngOnInit() {
+    this.categorySrv.getAll().subscribe((resp: any) => {
+      this.categories = resp.data;
+    })
+
     this.formObj.id = this._route.snapshot.params['id'];
     if (this.formObj.id == 'new') {
       this.action = true;
@@ -48,6 +55,7 @@ export class ActionTopicsComponent implements OnInit {
         console.log(resp);
         this.formObj.name = resp.data.name;
         this.formObj.image = resp.data.image;
+        this.formObj.category = resp.data.category;
         this.formObj.description = resp.data.description;
       })
     }
@@ -65,7 +73,8 @@ export class ActionTopicsComponent implements OnInit {
 
     if (
       this.formObj.name === '' ||
-      this.formObj.image === ''
+      this.formObj.image === '' ||
+      this.formObj.category === null
     ) {
       this.toast.error('Credentials is not correct', 'Oops', {
         timeOut: 2000,

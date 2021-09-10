@@ -58,6 +58,7 @@ import { SliderActionComponent } from './pages/slider/slider-action/slider-actio
 import { SliderService } from './services/slider.service';
 import { SurveyComponent } from './pages/survey/survey.component';
 import { StarRatingModule } from 'angular-rating-star';
+import { AllVotesComponent } from './pages/productVotes/all-votes/all-votes.component';
 
 // *******************************************************************************
 //
@@ -81,7 +82,8 @@ import { StarRatingModule } from 'angular-rating-star';
     UpdateProfileComponent,
     AllSliderComponent,
     SliderActionComponent,
-    SurveyComponent
+    SurveyComponent,
+    AllVotesComponent
   ],
 
   imports: [
